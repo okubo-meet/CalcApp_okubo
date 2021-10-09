@@ -17,8 +17,9 @@ struct CircleText: View {
     let buttonSize = CGFloat(UIScreen.main.bounds.width) / 5
     
     var body: some View {
-        //演算子はオレンジ色
+        //textが演算子か判定
         if calcViewModel.isOperator(text: text) {
+            //演算子はオレンジ色
             Text(text)
                 .font(.title)
                 .fontWeight(.bold)
@@ -27,7 +28,6 @@ struct CircleText: View {
                 .background(isTapped ? Color.white : Color.orange)
                 .cornerRadius(buttonSize / 2)
                 .animation(.default)
-            
         } else if text == "0" {
             //0ボタンのみサイズ横幅を大きくする
             Text(text)
@@ -38,8 +38,8 @@ struct CircleText: View {
                 .background(isTapped ? Color.white : Color.gray)
                 .cornerRadius(buttonSize / 2)
                 .animation(.default)
-            
         } else {
+            //その他のボタン
             Text(text)
                 .font(.title)
                 .fontWeight(.bold)
@@ -48,10 +48,7 @@ struct CircleText: View {
                 .background(isTapped ? Color.white : Color.gray)
                 .cornerRadius(buttonSize / 2)
                 .animation(.default)
-                
         }
-        
-        
     }// body
 }
 

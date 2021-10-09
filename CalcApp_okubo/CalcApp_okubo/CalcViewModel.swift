@@ -9,8 +9,6 @@ import UIKit
 import SwiftUI
 
 class CalcViewModel: ObservableObject {
-    
-    
     /// 演算子かどうか判定する関数
     /// - Parameter text: ボタンのテキスト
     /// - Returns: 判定結果
@@ -19,6 +17,4 @@ class CalcViewModel: ObservableObject {
         let operators = ["+", "-", "×", "÷", "="]
         return operators.contains(text)
     }// isOperator
-    
-    
 }
