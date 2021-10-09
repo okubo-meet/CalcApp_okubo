@@ -8,30 +8,47 @@
 import SwiftUI
 
 struct CircleText: View {
-    //ボタンテキスト
-    var text: String
-    //ボタンの色
-    var color: Color
+    @ObservedObject var calcViewModel: CalcViewModel
+    //ボタンが押された時の判定
+    @Binding var isTapped: Bool
+    //ボタンのテキスト
+    let text: String
+    //ボタンのサイズ
+    let buttonSize = CGFloat(UIScreen.main.bounds.width) / 5
     
     var body: some View {
-        //0ボタンのみサイズ横幅を大きくする
-        if text == "0" {
+        //演算子はオレンジ色
+        if calcViewModel.isOperator(text: text) {
             Text(text)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-                .frame(width: 160, height: 80)
-                .background(Color.gray)
-                .cornerRadius(40)
+                .frame(width: buttonSize, height: buttonSize)
+                .background(isTapped ? Color.white : Color.orange)
+                .cornerRadius(buttonSize / 2)
+                .animation(.default)
+            
+        } else if text == "0" {
+            //0ボタンのみサイズ横幅を大きくする
+            Text(text)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(width: buttonSize * 2 + 10, height: buttonSize)
+                .background(isTapped ? Color.white : Color.gray)
+                .cornerRadius(buttonSize / 2)
+                .animation(.default)
             
         } else {
             Text(text)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-                .frame(width: 80, height: 80)
-                .background(color)
-                .cornerRadius(40)
+                .frame(width: buttonSize, height: buttonSize)
+                .background(isTapped ? Color.white : Color.gray)
+                .cornerRadius(buttonSize / 2)
+                .animation(.default)
+                
         }
         
         
@@ -40,6 +57,6 @@ struct CircleText: View {
 
 struct CircleText_Previews: PreviewProvider {
     static var previews: some View {
-        CircleText(text: "1", color: .gray)
+        CircleText(calcViewModel: CalcViewModel(), isTapped: .constant(false), text: "1")
     }
 }
