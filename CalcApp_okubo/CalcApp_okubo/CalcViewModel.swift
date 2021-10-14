@@ -9,6 +9,8 @@ import UIKit
 import SwiftUI
 
 class CalcViewModel: ObservableObject {
+    //入力結果の文字列
+    @Published var displayText: String = "0"
     /// 演算子かどうか判定する関数
     /// - Parameter text: ボタンのテキスト
     /// - Returns: 判定結果
