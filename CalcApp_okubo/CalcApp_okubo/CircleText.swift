@@ -17,48 +17,34 @@ struct CircleText: View {
         //textが演算子か判定
         if calcViewModel.isOperator(text: text) {
             //演算子ボタン
-            Button(action: {
-                print(text)
-            }) {
-                //演算子はオレンジ色 計算機能を作るときに色の切り替えも実装する
-                Text(text)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .frame(width: buttonSize, height: buttonSize)
-                    .background(Color.orange)
-                    .cornerRadius(buttonSize / 2)
-                    .animation(.default)
-            }
+            //演算子はオレンジ色 計算機能を作るときに色の切り替えも実装する
+            Text(text)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(width: buttonSize, height: buttonSize)
+                .background(Color.orange)
+                .cornerRadius(buttonSize / 2)
+                .animation(.default)
         } else if text == "0" {
             //0ボタン
-            Button(action: {
-                print(text)
-            }) {
-                //0ボタンのみサイズ横幅を大きくする
-                Text(text)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .frame(width: buttonSize * 2 + 10, height: buttonSize)
-                    .background(Color.gray)
-                    .cornerRadius(buttonSize / 2)
-                    .animation(.default)
-            }
+            //0ボタンのみサイズ横幅を大きくする
+            Text(text)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(width: buttonSize * 2 + 10, height: buttonSize)
+                .background(Color.gray)
+                .cornerRadius(buttonSize / 2)
         } else {
             //その他のボタン
-            Button(action: {
-                print(text)
-            }) {
-                Text(text)
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .frame(width: buttonSize, height: buttonSize)
-                    .background(Color.gray)
-                    .cornerRadius(buttonSize / 2)
-                    .animation(.default)
-            }
+            Text(text)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(width: buttonSize, height: buttonSize)
+                .background(Color.gray)
+                .cornerRadius(buttonSize / 2)
         }
     }// body
 }
