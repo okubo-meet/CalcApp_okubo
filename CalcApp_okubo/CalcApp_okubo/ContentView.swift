@@ -33,7 +33,7 @@ struct ContentView: View {
                     HStack(spacing: 0) {
                         ForEach(0..<buttonStr[row].count, id: \.self) { col in
                             Button(action: {
-                                print(buttonStr[row][col])
+                                calcViewModel.buttonAction(text: buttonStr[row][col])
                             }) {
                                 CircleText(calcViewModel: calcViewModel,
                                            text: buttonStr[row][col])
