@@ -21,9 +21,9 @@ struct CircleText: View {
             Text(text)
                 .font(.title)
                 .fontWeight(.bold)
-                .foregroundColor(isWhite() ? .orange : .white)
+                .foregroundColor(isActiveColor() ? .orange : .white)
                 .frame(width: buttonSize, height: buttonSize)
-                .background(isWhite() ? Color.white : Color.orange)
+                .background(isActiveColor() ? Color.white : Color.orange)
                 .cornerRadius(buttonSize / 2)
                 .animation(.default)
         } else if text == "0" {
@@ -50,7 +50,7 @@ struct CircleText: View {
     
     /// 演算子ボタンが押されているかを返す関数
     /// - Returns: ボタンとテキストの色を切り替えるために使う
-    private func isWhite() -> Bool {
+    private func isActiveColor() -> Bool {
         if calcViewModel.calcOperator.rawValue == text {
             return calcViewModel.calcOperator.isActive()
         } else {
