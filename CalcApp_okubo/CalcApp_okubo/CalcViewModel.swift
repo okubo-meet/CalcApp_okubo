@@ -13,6 +13,8 @@ class CalcViewModel: ObservableObject {
     @Published var displayText: String = "0"
     /// 現在有効な演算子
     @Published var calcOperator: Operator = .equal
+    ///演算子ボタンを白に切り替えるトリガー
+    @Published var isWhite = false
     ///演算子を押す前に入力された数値の文字列
     private var firstNumber: String = ""
     /// 演算子を押した後に入力された数値の文字列
@@ -30,6 +32,8 @@ class CalcViewModel: ObservableObject {
     /// 押されたボタンによって呼び出す処理が変える関数
     /// - Parameter text: 押されたボタンのテキスト
     func buttonAction(text: String) {
+        //ボタンが押されたら白くなってるボタンが元に戻る
+        isWhite = false
         //演算子が押された場合
         if isOperator(text: text) {
             setOperator(Operator(rawValue: text)!)
@@ -104,6 +108,8 @@ class CalcViewModel: ObservableObject {
             }
             //押された演算子を保持
             calcOperator = paramOperator
+            //ボタンを白くする
+            isWhite = true
         }
     }
     ///計算結果を表示する関数

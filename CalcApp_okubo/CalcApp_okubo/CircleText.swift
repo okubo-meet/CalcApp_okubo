@@ -51,7 +51,8 @@ struct CircleText: View {
     /// 演算子ボタンが押されているかを返す関数
     /// - Returns: ボタンとテキストの色を切り替えるために使う
     private func isActiveColor() -> Bool {
-        if calcViewModel.calcOperator.rawValue == text {
+        //押された演算子ボタンか判定し、トリガーがtrueになっている場合のみ色を切り替える
+        if calcViewModel.calcOperator.rawValue == text && calcViewModel.isWhite {
             return calcViewModel.calcOperator.isActive()
         } else {
             return false
