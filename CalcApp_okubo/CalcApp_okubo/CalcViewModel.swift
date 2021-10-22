@@ -52,12 +52,14 @@ class CalcViewModel: ObservableObject {
     }
     /// 数字ボタンを押した時の関数
     private func insertNumber(_ text: String) {
-        if calcOperator == .equal {
-            firstNumber += text
-            displayText = firstNumber
-        } else {
+        if calcOperator.isActive() {
+            //演算子が押されているなら後ろの項に数字を足して表示
             secondNumber += text
             displayText = secondNumber
+        } else {
+            //まだ演算子が押されていないなら前の項に数字を足して表示
+            firstNumber += text
+            displayText = firstNumber
         }
     }
     ///ACボタンを押した時の関数
@@ -90,6 +92,16 @@ class CalcViewModel: ObservableObject {
             firstNumber = ""
             secondNumber = ""
         } else {
+            //他の演算子ボタンの処理
+            //既に二つ目の数字が入力されている場合
+            if secondNumber != "" {
+                //これまでの入力状況で計算
+                calculation(calcOperator)
+                //計算結果を前の項として扱う
+                firstNumber = displayText
+                //後ろの項をリセット
+                secondNumber = ""
+            }
             //押された演算子を保持
             calcOperator = paramOperator
         }
