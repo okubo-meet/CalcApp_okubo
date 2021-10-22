@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator: String {
+enum Operator: String, CaseIterable {
     case divide = "÷"
     case multiply = "×"
     case subtraction = "-"
