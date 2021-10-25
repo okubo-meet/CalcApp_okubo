@@ -32,9 +32,13 @@ struct ContentView: View {
                 ForEach(0..<buttonStr.count, id: \.self) { row in
                     HStack(spacing: 0) {
                         ForEach(0..<buttonStr[row].count, id: \.self) { col in
-                            CircleText(calcViewModel: calcViewModel,
-                                       text: buttonStr[row][col])
-                                .padding(5)
+                            Button(action: {
+                                calcViewModel.buttonAction(text: buttonStr[row][col])
+                            }) {
+                                CircleText(calcViewModel: calcViewModel,
+                                           text: buttonStr[row][col])
+                                    .padding(5)
+                            }
                         }// ForEach col
                     }// HStack
                 }// ForEach row
