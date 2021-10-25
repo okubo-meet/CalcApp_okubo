@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator: String {
+enum Operator: String, CaseIterable {
     case divide = "÷"
     case multiply = "×"
     case subtraction = "-"
@@ -26,7 +26,7 @@ enum Operator: String {
         case .addition:
             return true
         case .equal:
-            //"="ボタンは
+            //入力前、計算終了の状態
             return false
         }
     }

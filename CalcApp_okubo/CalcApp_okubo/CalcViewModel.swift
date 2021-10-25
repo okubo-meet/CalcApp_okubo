@@ -25,8 +25,8 @@ class CalcViewModel: ObservableObject {
     /// - Parameter text: ボタンのテキスト
     /// - Returns: 判定結果
     func isOperator(text: String) -> Bool {
-        //引数がこの配列列に含まれているかの判定を消す
-        let operators = ["+", "-", "×", "÷", "="]
+        //引数がOperatorのrawValueに含まれているかの判定を返す
+        let operators = Operator.allCases.map { $0.rawValue }
         return operators.contains(text)
     }
     /// 押されたボタンによって呼び出す処理が変える関数
