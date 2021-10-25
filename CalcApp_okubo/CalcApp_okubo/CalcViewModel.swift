@@ -7,7 +7,7 @@
 
 import UIKit
 import SwiftUI
-
+//commitのfixesテスト
 class CalcViewModel: ObservableObject {
     ///入力結果の文字列
     @Published var displayText: String = "0"
