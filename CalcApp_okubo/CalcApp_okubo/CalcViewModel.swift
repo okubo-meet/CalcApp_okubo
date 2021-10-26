@@ -41,14 +41,13 @@ class CalcViewModel: ObservableObject {
             //演算子以外の処理
             switch text {
             case "AC":
-                print("オールクリア")
                 clearText()
             case "+/-":
                 print("正負を反転する")
             case "%":
                 print("1/100にする")
             case ".":
-                print("小数点付与")
+                setDecimalPoint(text)
             default:
                 insertNumber(text)
             }
@@ -68,10 +67,56 @@ class CalcViewModel: ObservableObject {
     }
     ///ACボタンを押した時の関数
     private func clearText() {
+        print("オールクリア")
         calcOperator = .equal
         displayText = "0"
         firstNumber = ""
         secondNumber = ""
+    }
+    ///小数点ボタンを押したときの関数
+    private func setDecimalPoint(_ text: String) {
+        //演算子が押されているか判定
+        if calcOperator.isActive() {
+            //後ろの項に小数点が付いているか判定
+            if pointCheck(secondNumber) {
+                print("既に小数点が付いています")
+            } else {
+                //まだついていないなら
+                print("小数点付与")
+                if secondNumber == "" {
+                    //何も入力されていないなら0に小数点を付与
+                    secondNumber = "0."
+                } else {
+                    //入力された数字に小数点を付与
+                    secondNumber += text
+                }
+                //画面に表示
+                displayText = secondNumber
+            }
+        } else {
+            //前の項で同じ処理
+            if pointCheck(firstNumber) {
+                print("既に小数点が付いています")
+            } else {
+                print("小数点付与")
+                if firstNumber == "" {
+                    firstNumber = "0."
+                } else {
+                    firstNumber += text
+                }
+                displayText = firstNumber
+            }
+        }
+    }
+    ///入力された数字に小数点が含まれているかを返す関数
+    private func pointCheck(_ text: String) -> Bool {
+        if text.contains(".") {
+            print("小数点を含む: \(text)")
+            return true
+        } else {
+            print("小数点を含まない: \(text)")
+            return false
+        }
     }
     ///演算子ボタンを押した時の処理
     private func setOperator(_ paramOperator:Operator) {
@@ -112,12 +157,15 @@ class CalcViewModel: ObservableObject {
             isWhite = true
         }
     }
-    ///計算結果を表示する関数
+    ///Double型で計算して結果を表示する関数
     private func calculation(_ paramOperator: Operator) {
-        //Intに変換された数値
-        let first = stringToInt(firstNumber)
-        let second = stringToInt(secondNumber)
-        var result = 0
+        //入力された数字を整える
+        firstNumber = fixNumber(firstNumber)
+        secondNumber = fixNumber(secondNumber)
+        //Double型に変換された数値
+        let first = stringToDouble(firstNumber)
+        let second = stringToDouble(secondNumber)
+        var result = 0.0
         //有効になっている演算子によって計算が変わる
         switch paramOperator {
         case .divide:
@@ -132,15 +180,33 @@ class CalcViewModel: ObservableObject {
             print("計算なし")
             result = first
         }
-        displayText = String(result)
+        print("\(first)と\(second)の計算結果 = \(result)")
+        //計算結果の値を整えて表示する
+        displayText = fixNumber(String(result))
     }
-    ///入力された数字を計算に使うためにIntに変換（後でDoubleへの変換も作る）
-    private func stringToInt(_ text: String) -> Int {
-        if let num = Int(text) {
+    ///入力された数字に不備があれば修正する関数
+    private func fixNumber(_ text: String) -> String {
+        var str = text
+        //入力に小数点が含まれているならループ処理
+        while pointCheck(str) {
+            //小数の最後が小数点か0で終わっている場合削除する
+            if str.last == "." || str.last == "0" {
+                str = String(str.dropLast())
+                print("修正: \(str)")
+            } else {
+                //修正の必要がなければループ終了
+                print("問題なし: \(str)")
+                break
+            }
+        }
+        return str
+    }
+    ///入力された数字を計算に使うためにIntに変換
+    private func stringToDouble(_ text: String) -> Double {
+        if let num = Double(text) {
             return num
         } else {
-            //入力がない
-            return 0
+            return 0.0
         }
     }
 }
