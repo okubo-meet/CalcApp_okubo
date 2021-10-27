@@ -14,7 +14,7 @@ enum Operator: String, CaseIterable {
     case addition = "+"
     case equal = "="
     
-    ///アクティブになっている演算子の色を白くする
+    ///アクティブになっている演算子
     func isActive() -> Bool {
         switch self {
         case .divide:
@@ -26,7 +26,7 @@ enum Operator: String, CaseIterable {
         case .addition:
             return true
         case .equal:
-            //"="ボタンは白くならない
+            //入力前、計算終了の状態
             return false
         }
     }

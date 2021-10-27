@@ -7,12 +7,14 @@
 
 import UIKit
 import SwiftUI
-//commitのfixesテスト
+
 class CalcViewModel: ObservableObject {
     ///入力結果の文字列
     @Published var displayText: String = "0"
     /// 現在有効な演算子
     @Published var calcOperator: Operator = .equal
+    ///演算子ボタンを白に切り替えるトリガー
+    @Published var isWhite = false
     ///演算子を押す前に入力された数値の文字列
     private var firstNumber: String = ""
     /// 演算子を押した後に入力された数値の文字列
@@ -30,6 +32,8 @@ class CalcViewModel: ObservableObject {
     /// 押されたボタンによって呼び出す処理が変える関数
     /// - Parameter text: 押されたボタンのテキスト
     func buttonAction(text: String) {
+        //ボタンが押されたら白くなってるボタンが元に戻る
+        isWhite = false
         //演算子が押された場合
         if isOperator(text: text) {
             setOperator(Operator(rawValue: text)!)
@@ -52,12 +56,14 @@ class CalcViewModel: ObservableObject {
     }
     /// 数字ボタンを押した時の関数
     private func insertNumber(_ text: String) {
-        if calcOperator == .equal {
-            firstNumber += text
-            displayText = firstNumber
-        } else {
+        if calcOperator.isActive() {
+            //演算子が押されているなら後ろの項に数字を足して表示
             secondNumber += text
             displayText = secondNumber
+        } else {
+            //まだ演算子が押されていないなら前の項に数字を足して表示
+            firstNumber += text
+            displayText = firstNumber
         }
     }
     ///ACボタンを押した時の関数
@@ -90,8 +96,20 @@ class CalcViewModel: ObservableObject {
             firstNumber = ""
             secondNumber = ""
         } else {
+            //他の演算子ボタンの処理
+            //既に二つ目の数字が入力されている場合
+            if secondNumber != "" {
+                //これまでの入力状況で計算
+                calculation(calcOperator)
+                //計算結果を前の項として扱う
+                firstNumber = displayText
+                //後ろの項をリセット
+                secondNumber = ""
+            }
             //押された演算子を保持
             calcOperator = paramOperator
+            //ボタンを白くする
+            isWhite = true
         }
     }
     ///計算結果を表示する関数
