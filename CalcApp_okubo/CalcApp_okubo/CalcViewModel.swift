@@ -46,6 +46,7 @@ class CalcViewModel: ObservableObject {
                 print("正負を反転する")
             case "%":
                 print("1/100にする")
+                persentAction()
             case ".":
                 setDecimalPoint(text)
             default:
@@ -56,12 +57,25 @@ class CalcViewModel: ObservableObject {
     /// 数字ボタンを押した時の関数
     private func insertNumber(_ text: String) {
         if calcOperator.isActive() {
-            //演算子が押されているなら後ろの項に数字を足して表示
-            secondNumber += text
+            //演算子が押されているなら
+            if secondNumber == "0" {
+                //最初に"0"が入力されているなら新たに入力された値を代入
+                secondNumber = text
+            } else {
+                //後ろの項に数字を追加
+                secondNumber += text
+            }
+            //画面に表示
             displayText = secondNumber
         } else {
-            //まだ演算子が押されていないなら前の項に数字を足して表示
-            firstNumber += text
+            //まだ演算子が押されていないなら
+            if firstNumber == "0" {
+                //最初に"0"が入力されているなら新たに入力された値を代入
+                firstNumber = text
+            } else {
+                //前の項に数字を追加
+                firstNumber += text
+            }
             displayText = firstNumber
         }
     }
@@ -72,6 +86,39 @@ class CalcViewModel: ObservableObject {
         displayText = "0"
         firstNumber = ""
         secondNumber = ""
+    }
+    ///%ボタンを押したときの関数
+    private func persentAction() {
+        //入力されている数字に0.01をかける
+        let persent = NSDecimalNumber(string: "0.01")
+        //計算に使う入力された数値
+        var num = NSDecimalNumber(string: "0.0")
+        //演算子が押されているか判定
+        if calcOperator.isActive() {
+            if secondNumber == "" {
+                print("処理なし")
+            } else {
+                num = stringToCalc(secondNumber)
+                print("計算に使う値：\(num)")
+                secondNumber = String("\(num.multiplying(by: persent))")
+                displayText = secondNumber
+            }
+        } else {
+            if firstNumber == "" {
+                if displayText == "0" {
+                    print("処理なし")
+                } else {
+                    //前回の計算結果が表示されているとき
+                    num = stringToCalc(displayText)
+                    print("計算に使う値：\(num)")
+                }
+            } else {
+                num = stringToCalc(firstNumber)
+                print("計算に使う値：\(num)")
+            }
+            firstNumber = String("\(num.multiplying(by: persent))")
+            displayText = firstNumber
+        }
     }
     ///小数点ボタンを押したときの関数
     private func setDecimalPoint(_ text: String) {
@@ -159,54 +206,39 @@ class CalcViewModel: ObservableObject {
     }
     ///Double型で計算して結果を表示する関数
     private func calculation(_ paramOperator: Operator) {
-        //入力された数字を整える
-        firstNumber = fixNumber(firstNumber)
-        secondNumber = fixNumber(secondNumber)
-        //Double型に変換された数値
-        let first = stringToDouble(firstNumber)
-        let second = stringToDouble(secondNumber)
-        var result = 0.0
+        //計算で扱う数値に変換
+        let first = NSDecimalNumber(string: firstNumber)
+        let second = NSDecimalNumber(string: secondNumber)
+        var result = "0.0"
         //有効になっている演算子によって計算が変わる
         switch paramOperator {
         case .divide:
-            result = first / second
+            print("\(first) ÷ \(second)")
+            result = String("\(first.dividing(by: second))")
         case .multiply:
-            result = first * second
+            print("\(first) × \(second)")
+            result = String("\(first.multiplying(by: second))")
         case .subtraction:
-            result = first - second
+            print("\(first) - \(second)")
+            result = String("\(first.subtracting(second))")
         case .addition:
-            result = first + second
+            print("\(first) + \(second)")
+            result = String("\(first.adding(second))")
         case .equal:
             print("計算なし")
-            result = first
+            result = String("\(first)")
         }
-        print("\(first)と\(second)の計算結果 = \(result)")
         //計算結果の値を整えて表示する
-        displayText = fixNumber(String(result))
+        displayText = result
     }
-    ///入力された数字に不備があれば修正する関数
-    private func fixNumber(_ text: String) -> String {
-        var str = text
-        //入力に小数点が含まれているならループ処理
-        while pointCheck(str) {
-            //小数の最後が小数点か0で終わっている場合削除する
-            if str.last == "." || str.last == "0" {
-                str = String(str.dropLast())
-                print("修正: \(str)")
-            } else {
-                //修正の必要がなければループ終了
-                print("問題なし: \(str)")
-                break
-            }
-        }
-        return str
-    }
-    ///入力された数字を計算に使うためにIntに変換
-    private func stringToDouble(_ text: String) -> Double {
-        if let num = Double(text) {
-            return num
+   ///数字を修正する関数 NSDecimalNumberを使用したら必要なくなったので削除
+
+    ///入力された数字を正確な計算に使うためにNSDecimalNumberに変換
+    private func stringToCalc(_ text: String) -> NSDecimalNumber {
+        if text == "" {
+            return NSDecimalNumber(string: "0.0")
         } else {
-            return 0.0
+            return NSDecimalNumber(string: text)
         }
     }
 }
