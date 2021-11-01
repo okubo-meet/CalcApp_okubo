@@ -44,6 +44,7 @@ class CalcViewModel: ObservableObject {
                 clearText()
             case "+/-":
                 print("正負を反転する")
+                changeSign()
             case "%":
                 print("1/100にする")
                 persentAction()
@@ -86,6 +87,30 @@ class CalcViewModel: ObservableObject {
         displayText = "0"
         firstNumber = ""
         secondNumber = ""
+    }
+    ///+/-ボタンのアクション
+    private func changeSign() {
+        //入力中の数字に"-1"をかける
+        let minus = stringToCalc("-1")
+        //入力された数字
+        var inputNumber: NSDecimalNumber
+        //演算子が押されているなら
+        if calcOperator.isActive() {
+            //後ろの項の処理
+            inputNumber = stringToCalc(secondNumber)
+            secondNumber = String("\(inputNumber.multiplying(by: minus))")
+            displayText = secondNumber
+        } else {
+            //前の項の処理
+            //入力がないとき
+            if firstNumber == "" {
+                //表示中のテキストを代入
+                firstNumber = displayText
+            }
+            inputNumber = stringToCalc(firstNumber)
+            firstNumber = String("\(inputNumber.multiplying(by: minus))")
+            displayText = firstNumber
+        }
     }
     ///%ボタンを押したときの関数
     private func persentAction() {
@@ -231,8 +256,6 @@ class CalcViewModel: ObservableObject {
         //計算結果の値を整えて表示する
         displayText = result
     }
-   ///数字を修正する関数 NSDecimalNumberを使用したら必要なくなったので削除
-
     ///入力された数字を正確な計算に使うためにNSDecimalNumberに変換
     private func stringToCalc(_ text: String) -> NSDecimalNumber {
         if text == "" {
