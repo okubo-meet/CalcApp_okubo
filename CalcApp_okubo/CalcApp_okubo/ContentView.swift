@@ -24,7 +24,7 @@ struct ContentView: View {
                 Spacer()
                 //ボタンの入力を反映するテキスト
                 Text(calcViewModel.displayText)
-                    .font(.system(size: UIScreen.main.bounds.width / 7))
+                    .font(.system(size: UIScreen.main.bounds.width / 7.5))
                     .foregroundColor(.white)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
                     .padding()
