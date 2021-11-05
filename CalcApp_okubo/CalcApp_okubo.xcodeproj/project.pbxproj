@@ -39,6 +39,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F1BBD0D2734E4C9006E4698 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7FDEF2A627043BDC0005F505 /* CalcApp_okuboApp.swift */,
+				7FDEF2A827043BDC0005F505 /* ContentView.swift */,
+				7FDEF2B52704623C0005F505 /* CircleText.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7F1BBD0E2734E524006E4698 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7F8A2917270ECD640088D60A /* CalcViewModel.swift */,
+				7FDFE12D27193B8D0091BC9C /* Operator.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7FDEF29A27043BDB0005F505 = {
 			isa = PBXGroup;
 			children = (
@@ -58,11 +77,8 @@
 		7FDEF2A527043BDC0005F505 /* CalcApp_okubo */ = {
 			isa = PBXGroup;
 			children = (
-				7FDEF2A627043BDC0005F505 /* CalcApp_okuboApp.swift */,
-				7FDEF2A827043BDC0005F505 /* ContentView.swift */,
-				7FDEF2B52704623C0005F505 /* CircleText.swift */,
-				7F8A2917270ECD640088D60A /* CalcViewModel.swift */,
-				7FDFE12D27193B8D0091BC9C /* Operator.swift */,
+				7F1BBD0D2734E4C9006E4698 /* View */,
+				7F1BBD0E2734E524006E4698 /* ViewModel */,
 				7FDEF2AA27043BDD0005F505 /* Assets.xcassets */,
 				7FDEF2AF27043BDD0005F505 /* Info.plist */,
 				7FDEF2AC27043BDD0005F505 /* Preview Content */,
