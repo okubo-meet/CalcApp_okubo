@@ -19,6 +19,8 @@ class CalcViewModel: ObservableObject {
     private var firstNumber: String = ""
     /// 演算子を押した後に入力された数値の文字列
     private var secondNumber: String = ""
+    ///SpeechManagerクラスのインスタンス
+    private let speechManager = SpeechManager()
     /// NumberFormatterのインスタンス
     private let numberFormatter:NumberFormatter = {
         let formatter = NumberFormatter()
@@ -36,7 +38,7 @@ class CalcViewModel: ObservableObject {
         formatter.maximumFractionDigits = 9
         //数値に直した際の最大有効桁数
         formatter.maximumSignificantDigits = 10
-        
+        formatter.roundingMode = .down
         return formatter
     }()
     // MARK: - メソッド
@@ -162,15 +164,17 @@ class CalcViewModel: ObservableObject {
                     num = stringToCalc(displayText)
                     print("1/100する値：\(num)")
                     firstNumber = String("\(num.multiplying(by: persent))")
-                    firstNumber = String(firstNumber.prefix(10))
                 }
             } else {
                 num = stringToCalc(firstNumber)
                 print("1/100する値：\(num)")
                 firstNumber = String("\(num.multiplying(by: persent))")
-                firstNumber = String(firstNumber.prefix(10))
+                print("結果:" + firstNumber)
             }
+            firstNumber = String(firstNumber.prefix(10))
+            print("10桁に抑える:" + firstNumber)
             firstNumber = String("\(stringToCalc(firstNumber))")
+            print("フォーマットにかける:" + firstNumber)
             displayText = commaStyle(firstNumber)
         }
     }
@@ -285,8 +289,12 @@ class CalcViewModel: ObservableObject {
             print("計算なし")
             result = String("\(first)")
         }
+        //計算結果を10桁までに表示
+        result = String(result.prefix(10))
         //計算結果の値を整えて表示する
         displayText = commaStyle(result)
+        //読み上げ
+        speechManager.speech(text: displayText)
     }
     ///入力された数字を正確な計算に使うためにNSDecimalNumberに変換する関数
     private func stringToCalc(_ text: String) -> NSDecimalNumber {

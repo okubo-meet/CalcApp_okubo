@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F8A2918270ECD640088D60A /* CalcViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8A2917270ECD640088D60A /* CalcViewModel.swift */; };
+		7FB41F6C2734EEB8000E537E /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB41F6B2734EEB8000E537E /* SpeechManager.swift */; };
 		7FDEF2A727043BDC0005F505 /* CalcApp_okuboApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDEF2A627043BDC0005F505 /* CalcApp_okuboApp.swift */; };
 		7FDEF2A927043BDC0005F505 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDEF2A827043BDC0005F505 /* ContentView.swift */; };
 		7FDEF2AB27043BDD0005F505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FDEF2AA27043BDD0005F505 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		7F8A2917270ECD640088D60A /* CalcViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcViewModel.swift; sourceTree = "<group>"; };
+		7FB41F6B2734EEB8000E537E /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		7FDEF2A327043BDC0005F505 /* CalcApp_okubo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalcApp_okubo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FDEF2A627043BDC0005F505 /* CalcApp_okuboApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcApp_okuboApp.swift; sourceTree = "<group>"; };
 		7FDEF2A827043BDC0005F505 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				7F8A2917270ECD640088D60A /* CalcViewModel.swift */,
+				7FB41F6B2734EEB8000E537E /* SpeechManager.swift */,
 				7FDFE12D27193B8D0091BC9C /* Operator.swift */,
 			);
 			path = ViewModel;
@@ -164,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FDEF2A927043BDC0005F505 /* ContentView.swift in Sources */,
+				7FB41F6C2734EEB8000E537E /* SpeechManager.swift in Sources */,
 				7F8A2918270ECD640088D60A /* CalcViewModel.swift in Sources */,
 				7FDFE12E27193B8D0091BC9C /* Operator.swift in Sources */,
 				7FDEF2A727043BDC0005F505 /* CalcApp_okuboApp.swift in Sources */,
