@@ -10,6 +10,7 @@ import SwiftUI
 struct ConfigView: View {
     private var language = ["日本語", "英語", "中国語"]
     @State var selectLang = 0
+    @State var animal: Animal = .alpaka
     var body: some View {
             Form {
                 Picker(selection: $selectLang, label: Text("言語")) {
@@ -18,7 +19,11 @@ struct ConfigView: View {
                     }
                 }
                 Text("入力桁数")
-                Text("動物")
+                Picker(selection: $animal, label: Text("動物")) {
+                    ForEach(Animal.allCases, id: \.self) { index in
+                        Text(index.rawValue)
+                    }
+                }
                 Text("タップ音")
             }
             

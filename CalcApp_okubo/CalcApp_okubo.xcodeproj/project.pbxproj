@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F1D0E7B275095C900ADF007 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1D0E7A275095C900ADF007 /* SoundPlayer.swift */; };
+		7F1D0E7D2750A37200ADF007 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1D0E7C2750A37200ADF007 /* Language.swift */; };
+		7F418A1A274F60D0005BEBE4 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F418A19274F60D0005BEBE4 /* Animal.swift */; };
+		7F418A20274F690B005BEBE4 /* ConfigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F418A1F274F690B005BEBE4 /* ConfigViewModel.swift */; };
 		7F8A2918270ECD640088D60A /* CalcViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8A2917270ECD640088D60A /* CalcViewModel.swift */; };
 		7FB41F6C2734EEB8000E537E /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB41F6B2734EEB8000E537E /* SpeechManager.swift */; };
 		7FDEF2A727043BDC0005F505 /* CalcApp_okuboApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDEF2A627043BDC0005F505 /* CalcApp_okuboApp.swift */; };
@@ -20,6 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F1D0E7A275095C900ADF007 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		7F1D0E7C2750A37200ADF007 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		7F418A19274F60D0005BEBE4 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
+		7F418A1F274F690B005BEBE4 /* ConfigViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewModel.swift; sourceTree = "<group>"; };
 		7F8A2917270ECD640088D60A /* CalcViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcViewModel.swift; sourceTree = "<group>"; };
 		7FB41F6B2734EEB8000E537E /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		7FDEF2A327043BDC0005F505 /* CalcApp_okubo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalcApp_okubo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,9 +68,13 @@
 			isa = PBXGroup;
 			children = (
 				7F8A2917270ECD640088D60A /* CalcViewModel.swift */,
+				7F418A1F274F690B005BEBE4 /* ConfigViewModel.swift */,
 				7FB41F6B2734EEB8000E537E /* SpeechManager.swift */,
+				7F1D0E7A275095C900ADF007 /* SoundPlayer.swift */,
 				7FDFE12D27193B8D0091BC9C /* Operator.swift */,
 				7FF248E62747607100905B0D /* Color.swift */,
+				7F418A19274F60D0005BEBE4 /* Animal.swift */,
+				7F1D0E7C2750A37200ADF007 /* Language.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -178,8 +190,12 @@
 				7F8A2918270ECD640088D60A /* CalcViewModel.swift in Sources */,
 				7FF248E92747683500905B0D /* ConfigView.swift in Sources */,
 				7FDFE12E27193B8D0091BC9C /* Operator.swift in Sources */,
+				7F418A20274F690B005BEBE4 /* ConfigViewModel.swift in Sources */,
 				7FDEF2A727043BDC0005F505 /* CalcApp_okuboApp.swift in Sources */,
 				7FDEF2B62704623C0005F505 /* CircleText.swift in Sources */,
+				7F1D0E7D2750A37200ADF007 /* Language.swift in Sources */,
+				7F1D0E7B275095C900ADF007 /* SoundPlayer.swift in Sources */,
+				7F418A1A274F60D0005BEBE4 /* Animal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

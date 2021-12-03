@@ -8,24 +8,19 @@
 import Foundation
 
 enum Operator: String, CaseIterable {
-    case divide = "÷"
-    case multiply = "×"
     case subtraction = "-"
     case addition = "+"
-    case equal = "="
+    //演算子が押されていない状態
+    case none = ""
     
     ///アクティブになっている演算子
     func isActive() -> Bool {
         switch self {
-        case .divide:
-            return true
-        case .multiply:
-            return true
         case .subtraction:
             return true
         case .addition:
             return true
-        case .equal:
+        case .none:
             //入力前、計算終了の状態
             return false
         }

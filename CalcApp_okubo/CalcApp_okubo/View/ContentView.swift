@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     //ViewModelのインスタンス
-    //    @ObservedObject private var calcViewModel = CalcViewModel()
+    @ObservedObject private var calcViewModel = CalcViewModel()
     //ボタンに表示するテキストを横一列毎にまとめた多次元配列
     private let buttonStr = [["7", "8", "9"],
                              ["4", "5", "6"],
@@ -47,13 +47,38 @@ struct ContentView: View {
                     .frame(minWidth: 0, maxWidth: .infinity,
                            minHeight: 0, maxHeight: screenHeight / 8, alignment: .center)
                     //ボタンの入力を反映するテキスト
-                    Text("0")
-                        .font(.system(size: screenWidth / 8))
-                        .fontWeight(.semibold)
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .padding(.horizontal)
+                    HStack {
+                        //前の項
+                        Text(calcViewModel.firstNumber)
+                            .font(.system(size: screenWidth / 8))
+                            .fontWeight(.semibold)
+                            .frame(minWidth: 0, maxWidth: screenWidth / 5, alignment: .center)
+                        //演算子
+                        Text(calcViewModel.calcOperator.rawValue)
+                            .font(.system(size: screenWidth / 8))
+                            .fontWeight(.semibold)
+                            .frame(minWidth: 0, maxWidth: screenWidth / 5, alignment: .center)
+                        //後ろの項
+                        Text(calcViewModel.secondNumber)
+                            .font(.system(size: screenWidth / 8))
+                            .fontWeight(.semibold)
+                            .frame(minWidth: 0, maxWidth: screenWidth / 5, alignment: .center)
+                        //=
+                        Text(calcViewModel.equalString())
+                            .font(.system(size: screenWidth / 8))
+                            .fontWeight(.semibold)
+                            .frame(minWidth: 0, maxWidth: screenWidth / 5, alignment: .center)
+                        //解
+                        Text(calcViewModel.answerNumber)
+                            .font(.system(size: screenWidth / 8))
+                            .fontWeight(.semibold)
+                            .frame(minWidth: 0, maxWidth: screenWidth / 5, alignment: .center)
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity,
+                           minHeight: 0, maxHeight: screenHeight / 8, alignment: .center)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
                     
                         //２重のForEachで多次元配列の値をからボタンに当てはめて並べる
                         ForEach(0..<buttonStr.count, id: \.self) { row in
@@ -61,6 +86,7 @@ struct ContentView: View {
                                 ForEach(0..<buttonStr[row].count, id: \.self) { col in
                                     Button(action: {
                                         //ボタンアクション
+                                        calcViewModel.buttonAction(text: buttonStr[row][col])
                                     }) {
                                         CircleText(text: buttonStr[row][col])
                                             .padding(5)

@@ -12,7 +12,7 @@ import AVFoundation
 class SpeechManager {
     ///AVSpeechSynthesizerのインスタンス
     private let synthesizer = AVSpeechSynthesizer()
-    
+    // MARK: - メソッド
     ///引数に渡された文字列を読み上げる関数
     func speech(text: String) {
         //読み上げる文字列
@@ -22,7 +22,7 @@ class SpeechManager {
         //音声の高さ
         utterance.pitchMultiplier = 1.1
         //日本語音声
-        let voice = AVSpeechSynthesisVoice.init(language: "ja-jp")
+        let voice = AVSpeechSynthesisVoice.init(language: "ja-JP")
         utterance.voice = voice
         synthesizer.speak(utterance)
     }
