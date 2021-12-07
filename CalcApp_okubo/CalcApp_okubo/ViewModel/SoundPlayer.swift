@@ -13,7 +13,7 @@ class SoundPlayer {
     private var circleTap: AVAudioPlayer?
     private let circleTapStr = ["button01", "button02", "button03"]
     //最後に使用した丸いボタンのタップ音
-    var circleTap_last = ""
+    private var circleTap_last = ""
     /// =ボタンのタップ音
     private var equalSound: AVAudioPlayer?
     ///クリアボタンのタップ音
@@ -21,10 +21,10 @@ class SoundPlayer {
     
     // MARK: - メソッド
     ///丸いボタンのサウンドを再生する関数
-    func circleTap_play(index: Int) {
+    func circleTap_play(sound: String) {
         print("前回使用した音: \(circleTap_last)")
         //前回使用したものと同じサウンドか判定
-        if circleTap_last == circleTapStr[index] {
+        if circleTap_last == sound {
             //circleTapのインスタンスが既にあるか判定
             if let numberTap = circleTap {
                 //リセット
@@ -33,11 +33,11 @@ class SoundPlayer {
                 print("circleTap: リセット")
             }
         } else {
-            let soundData = NSDataAsset(name: circleTapStr[index])!.data
+            let soundData = NSDataAsset(name: sound)!.data
             circleTap = try? AVAudioPlayer(data: soundData)
             print("circleTap: インスタンス作成")
             //使用したサウンドを記憶
-            circleTap_last = circleTapStr[index]
+            circleTap_last = sound
         }
         //再生
         circleTap?.play()

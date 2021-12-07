@@ -14,7 +14,7 @@ struct CircleText: View {
     //ボタンのテキスト
     let text: String
     var body: some View {
-        if text == "AC" || text == "=" {
+        if text == "C" || text == "=" {
             //黄色ボタン
             Text(text)
                 .font(.title)

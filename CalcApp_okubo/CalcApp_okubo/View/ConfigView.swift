@@ -8,23 +8,32 @@
 import SwiftUI
 
 struct ConfigView: View {
-    private var language = ["日本語", "英語", "中国語"]
-    @State var selectLang = 0
-    @State var animal: Animal = .alpaka
+    //CalcViewModelの共有インスタンス
+    @EnvironmentObject var calcViewModel: CalcViewModel
+    
     var body: some View {
             Form {
-                Picker(selection: $selectLang, label: Text("言語")) {
-                    ForEach(0..<language.count) { num in
-                        Text(language[num])
+                Picker(selection: $calcViewModel.language, label: Text("言語")) {
+                    ForEach(Language.allCases, id: \.self) { index in
+                        Text(index.rawValue)
                     }
                 }
-                Text("入力桁数")
-                Picker(selection: $animal, label: Text("動物")) {
+                Picker(selection: $calcViewModel.digit, label: Text("入力桁数")) {
+                    ForEach(Digit.allCases, id: \.self) { index in
+                        Text(index.rawValue)
+                    }
+                }
+                Picker(selection: $calcViewModel.animal, label: Text("動物")) {
                     ForEach(Animal.allCases, id: \.self) { index in
                         Text(index.rawValue)
                     }
                 }
-                Text("タップ音")
+                Picker(selection: $calcViewModel.tapSound, label: Text("タップ音")) {
+                    ForEach(TapSound.allCases, id: \.self) { index in
+                        Text(index.rawValue)
+                    }
+                }
+                
             }
             
             .navigationTitle("設定")

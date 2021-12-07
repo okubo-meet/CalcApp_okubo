@@ -14,7 +14,7 @@ class SpeechManager {
     private let synthesizer = AVSpeechSynthesizer()
     // MARK: - メソッド
     ///引数に渡された文字列を読み上げる関数
-    func speech(text: String) {
+    func speech(text: String, local: String) {
         //読み上げる文字列
         let utterance = AVSpeechUtterance.init(string: text)
         //読み上げのスピード
@@ -22,7 +22,7 @@ class SpeechManager {
         //音声の高さ
         utterance.pitchMultiplier = 1.1
         //日本語音声
-        let voice = AVSpeechSynthesisVoice.init(language: "ja-JP")
+        let voice = AVSpeechSynthesisVoice.init(language: local)
         utterance.voice = voice
         synthesizer.speak(utterance)
     }

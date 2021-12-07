@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    //ViewModelのインスタンス
-    @ObservedObject private var calcViewModel = CalcViewModel()
+    //CalcViewModelの共有インスタンス
+    @EnvironmentObject var calcViewModel: CalcViewModel
     //ボタンに表示するテキストを横一列毎にまとめた多次元配列
     private let buttonStr = [["7", "8", "9"],
                              ["4", "5", "6"],
                              ["1", "2", "3"],
                              ["0", "+", "-"],
-                             ["AC", "="]]
+                             ["C", "="]]
     //画面の高さ
     private let screenHeight = UIScreen.main.bounds.height
     //画面の幅
@@ -40,14 +40,14 @@ struct ContentView: View {
                             }
                         }// HStack
                         //読み上げの際に出てくる画像
-                        Image("animal_arupaka")
+                        Image(calcViewModel.animal.toImageString())
                             .resizable()
                             .scaledToFit()
                     }// ZStack
                     .frame(minWidth: 0, maxWidth: .infinity,
                            minHeight: 0, maxHeight: screenHeight / 8, alignment: .center)
                     //ボタンの入力を反映するテキスト
-                    HStack {
+                    HStack() {
                         //前の項
                         Text(calcViewModel.firstNumber)
                             .font(.system(size: screenWidth / 8))
@@ -57,7 +57,7 @@ struct ContentView: View {
                         Text(calcViewModel.calcOperator.rawValue)
                             .font(.system(size: screenWidth / 8))
                             .fontWeight(.semibold)
-                            .frame(minWidth: 0, maxWidth: screenWidth / 5, alignment: .center)
+                            .frame(minWidth: 0, maxWidth: screenWidth / 10, alignment: .center)
                         //後ろの項
                         Text(calcViewModel.secondNumber)
                             .font(.system(size: screenWidth / 8))
@@ -67,12 +67,12 @@ struct ContentView: View {
                         Text(calcViewModel.equalString())
                             .font(.system(size: screenWidth / 8))
                             .fontWeight(.semibold)
-                            .frame(minWidth: 0, maxWidth: screenWidth / 5, alignment: .center)
+                            .frame(minWidth: 0, maxWidth: screenWidth / 10, alignment: .center)
                         //解
                         Text(calcViewModel.answerNumber)
                             .font(.system(size: screenWidth / 8))
                             .fontWeight(.semibold)
-                            .frame(minWidth: 0, maxWidth: screenWidth / 5, alignment: .center)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                     }
                     .frame(minWidth: 0, maxWidth: .infinity,
                            minHeight: 0, maxHeight: screenHeight / 8, alignment: .center)
