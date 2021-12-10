@@ -7,8 +7,9 @@
 
 import UIKit
 import SwiftUI
+import AVFAudio
 
-class CalcViewModel: ObservableObject {
+class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     ///計算式の解の文字列
     @Published var answerNumber = ""
     ///演算子前の数値の文字列
@@ -19,8 +20,8 @@ class CalcViewModel: ObservableObject {
     @Published var calcOperator: Operator = .none
     /// "="と計算結果の表示有無
     @Published var isEqual = false
-    ///演算子ボタンを白に切り替えるトリガー
-    @Published var isWhite = false
+    ///読み上げ中かの判定
+    @Published var speaker: Speaker = .off
     /// 選択中の動物
     @Published var animal: Animal = .alpaka
     /// 選択中の言語
@@ -33,6 +34,22 @@ class CalcViewModel: ObservableObject {
     private let speechManager = SpeechManager()
     /// SoundPlayerクラスのインスタンス
     private let soundPlayer = SoundPlayer()
+    //デリゲート設定
+    override init() {
+        super.init()
+        speechManager.synthesizer.delegate = self
+    }
+    // MARK: - デリゲートメソッド
+    ///読み上げ開始を検知するデリゲートメソッド
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
+        print("読み上げ開始")
+        speaker = .on
+    }
+    ///読み上げ終了を検知するデリゲートメソッド
+    func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
+        print("読み上げ終了")
+        speaker = .off
+    }
     // MARK: - メソッド
     /// 演算子かどうか判定する関数
     /// - Parameter text: ボタンのテキスト
@@ -169,12 +186,25 @@ class CalcViewModel: ObservableObject {
         case .none:
             print("計算なし")
         }
-        speechManager.speech(text: firstNumber, local: language.local())
-        speechManager.speech(text: paramOperator.rawValue, local: language.local())
-        speechManager.speech(text: secondNumber, local: language.local())
-        speechManager.speech(text: "=", local: language.local())
+        //読み上げ開始
+        speechManager.speech_number(num: firstNumber, local: language.local())
+        speech_operator(calcOperator)
+        speechManager.speech_number(num: secondNumber, local: language.local())
+        speechManager.speech_equal(language: language)
+        //解を画面に表示
         answerNumber = String("\(answer)")
-        speechManager.speech(text: answerNumber, local: language.local())
+        speechManager.speech_number(num: answerNumber, local: language.local())
+    }
+    ///演算子の読み上げ関数を呼び出す関数
+    private func speech_operator(_ paramOperator: Operator) {
+        //画面に表示されている方を読み上げる
+        if paramOperator == .addition {
+            //"+"の読み上げ
+            speechManager.speech_plus(language: language)
+        } else if paramOperator == .subtraction {
+            //"-"の読み上げ
+            speechManager.speech_minus(language: language)
+        }
     }
     ///条件に応じて=の文字列を返す関数
     func equalString() -> String {

@@ -39,10 +39,16 @@ struct ContentView: View {
                                 
                             }
                         }// HStack
-                        //読み上げの際に出てくる画像
-                        Image(calcViewModel.animal.toImageString())
-                            .resizable()
-                            .scaledToFit()
+                        HStack {
+                            //動物の画像
+                            Image(calcViewModel.animal.toImageString())
+                                .resizable()
+                                .scaledToFit()
+                            //読み上げ中に切り替わる画像
+                            Image(systemName: calcViewModel.speaker.rawValue)
+                                .font(.title)
+                                .foregroundColor(calcViewModel.speaker.color())
+                        }
                     }// ZStack
                     .frame(minWidth: 0, maxWidth: .infinity,
                            minHeight: 0, maxHeight: screenHeight / 8, alignment: .center)

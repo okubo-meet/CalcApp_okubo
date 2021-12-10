@@ -14,6 +14,7 @@
 		7FB41F6C2734EEB8000E537E /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB41F6B2734EEB8000E537E /* SpeechManager.swift */; };
 		7FBE65922759E1AF00B06218 /* TapSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBE65912759E1AF00B06218 /* TapSound.swift */; };
 		7FBE65942759E72600B06218 /* Digit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBE65932759E72600B06218 /* Digit.swift */; };
+		7FCAE1402763110600BA8A70 /* Speaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE13F2763110600BA8A70 /* Speaker.swift */; };
 		7FDEF2A727043BDC0005F505 /* CalcApp_okuboApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDEF2A627043BDC0005F505 /* CalcApp_okuboApp.swift */; };
 		7FDEF2A927043BDC0005F505 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDEF2A827043BDC0005F505 /* ContentView.swift */; };
 		7FDEF2AB27043BDD0005F505 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FDEF2AA27043BDD0005F505 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		7FB41F6B2734EEB8000E537E /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
 		7FBE65912759E1AF00B06218 /* TapSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapSound.swift; sourceTree = "<group>"; };
 		7FBE65932759E72600B06218 /* Digit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Digit.swift; sourceTree = "<group>"; };
+		7FCAE13F2763110600BA8A70 /* Speaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Speaker.swift; sourceTree = "<group>"; };
 		7FDEF2A327043BDC0005F505 /* CalcApp_okubo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalcApp_okubo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FDEF2A627043BDC0005F505 /* CalcApp_okuboApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcApp_okuboApp.swift; sourceTree = "<group>"; };
 		7FDEF2A827043BDC0005F505 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				7FBE65912759E1AF00B06218 /* TapSound.swift */,
 				7F1D0E7C2750A37200ADF007 /* Language.swift */,
 				7FBE65932759E72600B06218 /* Digit.swift */,
+				7FCAE13F2763110600BA8A70 /* Speaker.swift */,
 				7FF248E62747607100905B0D /* Color.swift */,
 			);
 			path = ViewModel;
@@ -198,6 +201,7 @@
 				7FBE65942759E72600B06218 /* Digit.swift in Sources */,
 				7FDEF2B62704623C0005F505 /* CircleText.swift in Sources */,
 				7F1D0E7D2750A37200ADF007 /* Language.swift in Sources */,
+				7FCAE1402763110600BA8A70 /* Speaker.swift in Sources */,
 				7F1D0E7B275095C900ADF007 /* SoundPlayer.swift in Sources */,
 				7F418A1A274F60D0005BEBE4 /* Animal.swift in Sources */,
 			);
