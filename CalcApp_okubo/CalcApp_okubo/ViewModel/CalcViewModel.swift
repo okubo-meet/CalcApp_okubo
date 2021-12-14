@@ -34,6 +34,8 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     private let speechManager = SpeechManager()
     /// SoundPlayerクラスのインスタンス
     private let soundPlayer = SoundPlayer()
+    ///読み上げの回数（５までカウント）
+    private var speechCount = 0
     //デリゲート設定
     override init() {
         super.init()
@@ -42,13 +44,19 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     // MARK: - デリゲートメソッド
     ///読み上げ開始を検知するデリゲートメソッド
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didStart utterance: AVSpeechUtterance) {
-        print("読み上げ開始")
         speaker = .on
+        speechCount += 1
+        print("読み上げ開始: \(speechCount)")
     }
     ///読み上げ終了を検知するデリゲートメソッド
     func speechSynthesizer(_ synthesizer: AVSpeechSynthesizer, didFinish utterance: AVSpeechUtterance) {
-        print("読み上げ終了")
-        speaker = .off
+        //式の解を読み終えたらときに終了の処理
+        if speechCount == 5 {
+            print("読み上げ終了")
+            speaker = .off
+            //カウントを０に戻す
+            speechCount = 0
+        }
     }
     // MARK: - メソッド
     /// 演算子かどうか判定する関数
@@ -187,23 +195,23 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
             print("計算なし")
         }
         //読み上げ開始
-        speechManager.speech_number(num: firstNumber, local: language.local())
+        speechManager.speech_number(num: firstNumber, local: language.local(), animal: animal)
         speech_operator(calcOperator)
-        speechManager.speech_number(num: secondNumber, local: language.local())
-        speechManager.speech_equal(language: language)
+        speechManager.speech_number(num: secondNumber, local: language.local(), animal: animal)
+        speechManager.speech_equal(language: language, animal: animal)
         //解を画面に表示
         answerNumber = String("\(answer)")
-        speechManager.speech_number(num: answerNumber, local: language.local())
+        speechManager.speech_number(num: answerNumber, local: language.local(), animal: animal)
     }
     ///演算子の読み上げ関数を呼び出す関数
     private func speech_operator(_ paramOperator: Operator) {
         //画面に表示されている方を読み上げる
         if paramOperator == .addition {
             //"+"の読み上げ
-            speechManager.speech_plus(language: language)
+            speechManager.speech_plus(language: language, animal: animal)
         } else if paramOperator == .subtraction {
             //"-"の読み上げ
-            speechManager.speech_minus(language: language)
+            speechManager.speech_minus(language: language, animal: animal)
         }
     }
     ///条件に応じて=の文字列を返す関数
