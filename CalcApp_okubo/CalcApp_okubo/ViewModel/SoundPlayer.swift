@@ -53,6 +53,8 @@ class SoundPlayer {
             equalSound = try? AVAudioPlayer(data: soundData)
             print("初回")
         }
+        //音量(0.0~1.0)
+        equalSound?.volume = 0.1
         //再生
         equalSound?.play()
     }

@@ -84,13 +84,15 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
             print("引き算")
             soundPlayer.circleTap_play(sound: tapSound.toSoundName())
         case "=":
-            if calcOperator == .none {
-                //演算子が表示されていないとき
-            } else {
+            //全ての入力ができてる時のみ計算開始
+            if calcOperator != .none && secondNumber != "" {
                 print("計算開始")
                 isEqual = true
                 calculation(calcOperator)
                 soundPlayer.equalSound_play()
+            } else {
+                //演算子が表示されていないとき
+                soundPlayer.clearSound_play()
             }
         default:
             insertNumber(text)
