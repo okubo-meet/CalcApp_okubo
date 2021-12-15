@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CircleText: View {
-    //    @ObservedObject var calcViewModel: CalcViewModel
+    //CalcViewModelの共有インスタンス
+    @EnvironmentObject var calcViewModel: CalcViewModel
     //ボタンのサイズ
     private let buttonSize = CGFloat(UIScreen.main.bounds.height) / 8
     //ボタンのテキスト
@@ -23,8 +24,17 @@ struct CircleText: View {
                 .frame(width: buttonSize * 1.5, height: buttonSize / 1.5)
                 .background(Color.buttonYellow)
                 .cornerRadius(buttonSize / 1.5)
+        } else if text == "+" || text == "-" {
+            //点滅する青ボタン(+,-)
+            Text(text)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(width: buttonSize, height: buttonSize)
+                .background(calcViewModel.isHighlight ? Color.blue : Color.buttonBulue)
+                .cornerRadius(buttonSize / 2)
         } else {
-            //青ボタン
+            //青ボタン(数字)
             Text(text)
                 .font(.title)
                 .fontWeight(.bold)
@@ -35,17 +45,6 @@ struct CircleText: View {
         }
         
     }// body
-    
-    //    /// 演算子ボタンが押されているかを返す関数
-    //    /// - Returns: ボタンとテキストの色を切り替えるために使う
-    //    private func isActiveColor() -> Bool {
-    //        //押された演算子ボタンか判定し、トリガーがtrueになっている場合のみ色を切り替える
-    //        if calcViewModel.calcOperator.rawValue == text && calcViewModel.isWhite {
-    //            return calcViewModel.calcOperator.isActive()
-    //        } else {
-    //            return false
-    //        }
-    //    }// isActive
 }
 
 struct CircleText_Previews: PreviewProvider {

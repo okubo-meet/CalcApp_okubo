@@ -18,6 +18,8 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     @Published var secondNumber: String = ""
     /// 現在有効な演算子
     @Published var calcOperator: Operator = .none
+    ///"＋,ー"ボタンの色を切り替えるためのトリガー
+    @Published var isHighlight = false
     /// "="と計算結果の表示有無
     @Published var isEqual = false
     ///読み上げ中かの判定
@@ -34,6 +36,8 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     private let speechManager = SpeechManager()
     /// SoundPlayerクラスのインスタンス
     private let soundPlayer = SoundPlayer()
+    /// "＋,ー"ボタンを点滅させるタイマー
+    private var blinkingTimer: Timer?
     ///読み上げの回数（５までカウント）
     private var speechCount = 0
     //デリゲート設定
@@ -59,13 +63,13 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         }
     }
     // MARK: - メソッド
-    /// 演算子かどうか判定する関数
-    /// - Parameter text: ボタンのテキスト
-    /// - Returns: 判定結果
-    func isOperator(text: String) -> Bool {
-        //引数がOperatorのrawValueに含まれているかの判定を返す
-        let operators = Operator.allCases.map { $0.rawValue }
-        return operators.contains(text)
+    ///条件に応じて=の文字列を返す関数
+    func equalString() -> String {
+        if isEqual {
+            return "="
+        } else {
+            return ""
+        }
     }
     /// 押されたボタンによって呼び出す処理が変える関数
     /// - Parameter text: 押されたボタンのテキスト
@@ -99,6 +103,25 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
             soundPlayer.circleTap_play(sound: tapSound.toSoundName())
         }
     }
+    /// 最初の数字が入力されたら"＋,ー"ボタンを点滅させる関数
+    private func buttonBlinking() {
+        blinkingTimer?.invalidate()
+        //演算子が入力されるまで点滅させるアニメーション
+        blinkingTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) {_ in
+            //演算子が入力されているか、前の項の入力が取り消されたとき
+            if self.calcOperator != .none || self.firstNumber == "" {
+                //アニメーション停止
+                self.blinkingTimer?.invalidate()
+                self.isHighlight = false
+                print("アニメーション終了")
+            } else {
+                withAnimation {
+                    //色を切り替える
+                    self.isHighlight.toggle()
+                }
+            }
+        }// Timer
+    }
     /// 数字ボタンを押した時の関数
     private func insertNumber(_ text: String) {
         //前回の計算結果が表示されているとき
@@ -106,6 +129,13 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
             //画面をリセット
             allClear()
         }
+        //最初の入力なら
+        if calcOperator == .none && firstNumber == "" {
+            //アニメーション開始
+            buttonBlinking()
+            print("アニメーション開始")
+        }
+        //入力可能桁数によって呼び出す関数を変える
         if digit.isDoubleDigit() {
             insertDoubleDigit(text)
         } else {
@@ -168,6 +198,9 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
             secondNumber.removeLast()
         } else if calcOperator != .none {
             calcOperator = .none
+            //ボタン点滅アニメーション開始
+            buttonBlinking()
+            print("アニメーション開始")
         } else if firstNumber != "" {
             firstNumber.removeLast()
         } else {
@@ -216,12 +249,5 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
             speechManager.speech_minus(language: language, animal: animal)
         }
     }
-    ///条件に応じて=の文字列を返す関数
-    func equalString() -> String {
-        if isEqual {
-            return "="
-        } else {
-            return ""
-        }
-    }
+    
 }
