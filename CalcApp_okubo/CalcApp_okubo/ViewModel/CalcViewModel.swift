@@ -88,16 +88,7 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
             print("引き算")
             soundPlayer.circleTap_play(sound: tapSound.toSoundName())
         case "=":
-            //全ての入力ができてる時のみ計算開始
-            if calcOperator != .none && secondNumber != "" {
-                print("計算開始")
-                isEqual = true
-                calculation(calcOperator)
-                soundPlayer.equalSound_play()
-            } else {
-                //演算子が表示されていないとき
-                soundPlayer.clearSound_play()
-            }
+            equalAction()
         default:
             insertNumber(text)
             soundPlayer.circleTap_play(sound: tapSound.toSoundName())
@@ -217,10 +208,30 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         isEqual = false
     }
     ///＝ボタンを押した時の関数
+    private func equalAction() {
+        //全ての入力ができてる時のみ計算開始
+        if calcOperator != .none && secondNumber != "" {
+            //読み上げ中は処理を行わない
+            if speaker == .on {
+                print("読み上げ中")
+            } else {
+                print("計算開始")
+                isEqual = true
+                calculation(calcOperator)
+                soundPlayer.equalSound_play()
+            }
+        } else {
+            //入力が足りないとき
+            soundPlayer.clearSound_play()
+        }
+    }
+    ///計算して読み上げる関数
     private func calculation(_ paramOperator: Operator) {
+        //計算に使う数値
         var answer = 0
         let first = Int(firstNumber)!
         let second = Int(secondNumber)!
+        //計算
         switch paramOperator {
         case .subtraction:
             answer = first - second
