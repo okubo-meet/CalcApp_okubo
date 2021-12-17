@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     //CalcViewModelの共有インスタンス
-    @EnvironmentObject var calcViewModel: CalcViewModel
+    @StateObject private var calcViewModel = CalcViewModel()
     //ボタンに表示するテキストを横一列毎にまとめた多次元配列
     private let buttonStr = [["7", "8", "9"],
                              ["4", "5", "6"],
@@ -31,7 +31,7 @@ struct ContentView: View {
                             Spacer()
                             
                             //設定画面のリンク
-                            NavigationLink(destination: ConfigView()) {
+                            NavigationLink(destination: ConfigView(calcViewModel: calcViewModel)) {
                                 Image(systemName: "gearshape.fill")
                                     .font(.title)
                                     .foregroundColor(.buttonBulue)
@@ -94,7 +94,7 @@ struct ContentView: View {
                                         //ボタンアクション
                                         calcViewModel.buttonAction(text: buttonStr[row][col])
                                     }) {
-                                        CircleText(text: buttonStr[row][col])
+                                        CircleText(calcViewModel: calcViewModel, text: buttonStr[row][col])
                                             .padding(5)
                                     }
                                 }// ForEach col
@@ -109,7 +109,6 @@ struct ContentView: View {
                                minHeight: 0, maxHeight: screenHeight / 8, alignment: .center)
                 }// VStack
             }// ZStack
-            .navigationTitle("戻る")
             .navigationBarHidden(true)
         }// NavigationView
     }// body

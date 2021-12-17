@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  CalcApp_okubo
+
+  Created by 大久保徹郎 on 2021/12/16.
+  
+*/
+"addition"    = "plus";
+"subtraction" = "minus";
+"equal"       = "equals";
+

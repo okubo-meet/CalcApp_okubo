@@ -12,7 +12,6 @@ struct CalcApp_okuboApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(CalcViewModel())
         }
     }
 }

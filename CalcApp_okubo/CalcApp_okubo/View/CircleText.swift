@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CircleText: View {
-    //CalcViewModelの共有インスタンス
-    @EnvironmentObject var calcViewModel: CalcViewModel
+    //ContentViewと共有するデータオブジェクト
+    @StateObject var calcViewModel: CalcViewModel
     //ボタンのサイズ
     private let buttonSize = CGFloat(UIScreen.main.bounds.height) / 8
     //ボタンのテキスト
@@ -49,6 +49,6 @@ struct CircleText: View {
 
 struct CircleText_Previews: PreviewProvider {
     static var previews: some View {
-        CircleText(text: "1")
+        CircleText(calcViewModel: CalcViewModel(), text: "1")
     }
 }

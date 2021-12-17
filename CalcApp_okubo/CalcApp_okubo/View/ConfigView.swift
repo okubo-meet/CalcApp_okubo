@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ConfigView: View {
-    //CalcViewModelの共有インスタンス
-    @EnvironmentObject var calcViewModel: CalcViewModel
-    
+    //ContentViewと共有するデータオブジェクト
+    //@StateObjectだとPickerを選択した際の画面遷移のアニメーションがなくなる
+    @ObservedObject var calcViewModel: CalcViewModel
     var body: some View {
             Form {
                 Picker(selection: $calcViewModel.language, label: Text("言語")) {
@@ -44,6 +44,6 @@ struct ConfigView: View {
 
 struct ConfigView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigView()
+        ConfigView(calcViewModel: CalcViewModel())
     }
 }
