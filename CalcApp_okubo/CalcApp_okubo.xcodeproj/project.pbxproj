@@ -21,6 +21,7 @@
 		7FDEF2AE27043BDD0005F505 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FDEF2AD27043BDD0005F505 /* Preview Assets.xcassets */; };
 		7FDEF2B62704623C0005F505 /* CircleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDEF2B52704623C0005F505 /* CircleText.swift */; };
 		7FDFE12E27193B8D0091BC9C /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDFE12D27193B8D0091BC9C /* Operator.swift */; };
+		7FEDF09B276C59FF00AF27B3 /* ConfigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FEDF09A276C59FF00AF27B3 /* ConfigViewModel.swift */; };
 		7FF248E72747607100905B0D /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF248E62747607100905B0D /* Color.swift */; };
 		7FF248E92747683500905B0D /* ConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF248E82747683500905B0D /* ConfigView.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 		7FDEF2AF27043BDD0005F505 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FDEF2B52704623C0005F505 /* CircleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleText.swift; sourceTree = "<group>"; };
 		7FDFE12D27193B8D0091BC9C /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
+		7FEDF09A276C59FF00AF27B3 /* ConfigViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigViewModel.swift; sourceTree = "<group>"; };
 		7FF248E62747607100905B0D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7FF248E82747683500905B0D /* ConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				7F8A2917270ECD640088D60A /* CalcViewModel.swift */,
+				7FEDF09A276C59FF00AF27B3 /* ConfigViewModel.swift */,
 				7FB41F6B2734EEB8000E537E /* SpeechManager.swift */,
 				7F1D0E7A275095C900ADF007 /* SoundPlayer.swift */,
 				7FDFE12D27193B8D0091BC9C /* Operator.swift */,
@@ -197,6 +200,7 @@
 				7F8A2918270ECD640088D60A /* CalcViewModel.swift in Sources */,
 				7FF248E92747683500905B0D /* ConfigView.swift in Sources */,
 				7FDFE12E27193B8D0091BC9C /* Operator.swift in Sources */,
+				7FEDF09B276C59FF00AF27B3 /* ConfigViewModel.swift in Sources */,
 				7FDEF2A727043BDC0005F505 /* CalcApp_okuboApp.swift in Sources */,
 				7FBE65922759E1AF00B06218 /* TapSound.swift in Sources */,
 				7FBE65942759E72600B06218 /* Digit.swift in Sources */,

@@ -10,6 +10,8 @@ import SwiftUI
 import AVFAudio
 
 class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
+    //エラーが解消できないためコメント化
+//    @EnvironmentObject var configViewModel: ConfigViewModel
     ///計算式の解の文字列
     @Published var answerNumber = ""
     ///演算子前の数値の文字列
@@ -25,13 +27,13 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
     ///読み上げ中かの判定
     @Published var speaker: Speaker = .off
     /// 選択中の動物
-    @Published var animal: Animal = .alpaka
+    private var animal: Animal = .alpaka
     /// 選択中の言語
-    @Published var language: Language = .japanese
+    private var language: Language = .japanese
     /// 選択中のタップ音
-    @Published var tapSound: TapSound = .sound_01
+    private var tapSound: TapSound = .sound_01
     /// 入力可能桁数
-    @Published var digit: Digit = .single
+    private var digit: Digit = .single
     ///SpeechManagerクラスのインスタンス
     private let speechManager = SpeechManager()
     /// SoundPlayerクラスのインスタンス
@@ -63,6 +65,14 @@ class CalcViewModel: NSObject, ObservableObject, AVSpeechSynthesizerDelegate {
         }
     }
     // MARK: - メソッド
+    ///設定項目を受け取る関数
+    func setUp(config: ConfigViewModel) {
+        animal   = config.animal
+        language = config.language
+        tapSound = config.tapSound
+        digit    = config.digit
+        print("動物：\(animal.rawValue), 言語：\(language.rawValue), サウンド：\(tapSound.rawValue), 桁数：\(digit.rawValue)")
+    }
     ///条件に応じて=の文字列を返す関数
     func equalString() -> String {
         if isEqual {

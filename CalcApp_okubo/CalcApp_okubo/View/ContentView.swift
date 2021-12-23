@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    //ConfigViewModelの共有インスタンス
+    @EnvironmentObject var configViewModel: ConfigViewModel
     //CalcViewModelの共有インスタンス
     @StateObject private var calcViewModel = CalcViewModel()
     //ボタンに表示するテキストを横一列毎にまとめた多次元配列
@@ -31,7 +33,7 @@ struct ContentView: View {
                             Spacer()
                             
                             //設定画面のリンク
-                            NavigationLink(destination: ConfigView(calcViewModel: calcViewModel)) {
+                            NavigationLink(destination: ConfigView()) {
                                 Image(systemName: "gearshape.fill")
                                     .font(.title)
                                     .foregroundColor(.buttonBulue)
@@ -41,7 +43,7 @@ struct ContentView: View {
                         }// HStack
                         HStack {
                             //動物の画像
-                            Image(calcViewModel.animal.toImageString())
+                            Image(configViewModel.animal.toImageString())
                                 .resizable()
                                 .scaledToFit()
                             //読み上げ中に切り替わる画像
@@ -94,7 +96,8 @@ struct ContentView: View {
                                         //ボタンアクション
                                         calcViewModel.buttonAction(text: buttonStr[row][col])
                                     }) {
-                                        CircleText(calcViewModel: calcViewModel, text: buttonStr[row][col])
+                                        CircleText(isHighlight: $calcViewModel.isHighlight,
+                                                   text: buttonStr[row][col])
                                             .padding(5)
                                     }
                                 }// ForEach col
@@ -109,8 +112,13 @@ struct ContentView: View {
                                minHeight: 0, maxHeight: screenHeight / 8, alignment: .center)
                 }// VStack
             }// ZStack
+            .onAppear {
+                //画面起動時、設定画面から戻ってきた時に設定をCalcViewModelに渡す
+                calcViewModel.setUp(config: configViewModel)
+            }
             .navigationBarHidden(true)
         }// NavigationView
+        .navigationViewStyle(.stack) //iPadでも同じ画面表示
     }// body
     
     init() {

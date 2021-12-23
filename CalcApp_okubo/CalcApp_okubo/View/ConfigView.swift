@@ -8,32 +8,46 @@
 import SwiftUI
 
 struct ConfigView: View {
-    //ContentViewと共有するデータオブジェクト
-    //@StateObjectだとPickerを選択した際の画面遷移のアニメーションがなくなる
-    @ObservedObject var calcViewModel: CalcViewModel
+    //ConfigViewModelの共有インスタンス
+    @EnvironmentObject var configViewModel: ConfigViewModel
+    //タップ音を再生するクラスのインスタンス
+    private let player = SoundPlayer()
     var body: some View {
             Form {
-                Picker(selection: $calcViewModel.language, label: Text("言語")) {
+                Picker(selection: $configViewModel.animal, label: Text("動物")) {
+                    ForEach(Animal.allCases, id: \.self) { index in
+                        HStack {
+                            Image(index.toImageString())
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 35)
+                            Text(index.rawValue)
+                        }// HStack
+                    }
+                }
+                Picker(selection: $configViewModel.language, label: Text("言語")) {
                     ForEach(Language.allCases, id: \.self) { index in
                         Text(index.rawValue)
                     }
                 }
-                Picker(selection: $calcViewModel.digit, label: Text("入力桁数")) {
+                Picker(selection: $configViewModel.tapSound, label: Text("タップ音")) {
+                    ForEach(TapSound.allCases, id: \.self) { index in
+                        HStack {
+                            //試聴ボタン
+                            Button(action: {
+                                player.circleTap_play(sound: index.toSoundName())
+                            }) {
+                                Image(systemName: "speaker.wave.3.fill")
+                            }
+                            Text(index.rawValue)
+                        }// HStack
+                    }
+                }
+                Picker(selection: $configViewModel.digit, label: Text("入力桁数")) {
                     ForEach(Digit.allCases, id: \.self) { index in
                         Text(index.rawValue)
                     }
                 }
-                Picker(selection: $calcViewModel.animal, label: Text("動物")) {
-                    ForEach(Animal.allCases, id: \.self) { index in
-                        Text(index.rawValue)
-                    }
-                }
-                Picker(selection: $calcViewModel.tapSound, label: Text("タップ音")) {
-                    ForEach(TapSound.allCases, id: \.self) { index in
-                        Text(index.rawValue)
-                    }
-                }
-                
             }
             
             .navigationTitle("設定")
@@ -44,6 +58,6 @@ struct ConfigView: View {
 
 struct ConfigView_Previews: PreviewProvider {
     static var previews: some View {
-        ConfigView(calcViewModel: CalcViewModel())
+        ConfigView()
     }
 }

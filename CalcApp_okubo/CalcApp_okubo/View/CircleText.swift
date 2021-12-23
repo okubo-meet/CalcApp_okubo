@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CircleText: View {
-    //ContentViewと共有するデータオブジェクト
-    @StateObject var calcViewModel: CalcViewModel
+    //＋、ーボタンを点滅させるためのトリガー
+    @Binding var isHighlight: Bool
     //ボタンのサイズ
     private let buttonSize = CGFloat(UIScreen.main.bounds.height) / 8
     //ボタンのテキスト
@@ -31,7 +31,7 @@ struct CircleText: View {
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(width: buttonSize, height: buttonSize)
-                .background(calcViewModel.isHighlight ? Color.blue : Color.buttonBulue)
+                .background(isHighlight ? Color.blue : Color.buttonBulue)
                 .cornerRadius(buttonSize / 2)
         } else {
             //青ボタン(数字)
@@ -49,6 +49,6 @@ struct CircleText: View {
 
 struct CircleText_Previews: PreviewProvider {
     static var previews: some View {
-        CircleText(calcViewModel: CalcViewModel(), text: "1")
+        CircleText(isHighlight: .constant(false), text: "1")
     }
 }
