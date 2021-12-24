@@ -8,60 +8,47 @@
 import SwiftUI
 
 struct CircleText: View {
-    @ObservedObject var calcViewModel: CalcViewModel
+    //＋、ーボタンを点滅させるためのトリガー
+    @Binding var isHighlight: Bool
     //ボタンのサイズ
-    private let buttonSize = CGFloat(UIScreen.main.bounds.width) / 5
+    private let buttonSize = CGFloat(UIScreen.main.bounds.height) / 8
     //ボタンのテキスト
     let text: String
     var body: some View {
-        //textが演算子か判定
-        if calcViewModel.isOperator(text: text) {
-            //演算子ボタン
-            //演算子はオレンジ色 計算機能を作るときに色の切り替えも実装する
-            Text(text)
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(isActiveColor() ? .orange : .white)
-                .frame(width: buttonSize, height: buttonSize)
-                .background(isActiveColor() ? Color.white : Color.orange)
-                .cornerRadius(buttonSize / 2)
-                .animation(.default)
-        } else if text == "0" {
-            //0ボタン
-            //0ボタンのみサイズ横幅を大きくする
+        if text == "C" || text == "=" {
+            //黄色ボタン
             Text(text)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
-                .frame(width: buttonSize * 2 + 10, height: buttonSize)
-                .background(Color.gray)
+                .frame(width: buttonSize * 1.5, height: buttonSize / 1.5)
+                .background(Color.buttonYellow)
+                .cornerRadius(buttonSize / 1.5)
+        } else if text == "+" || text == "-" {
+            //点滅する青ボタン(+,-)
+            Text(text)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(width: buttonSize, height: buttonSize)
+                .background(isHighlight ? Color.blue : Color.buttonBulue)
                 .cornerRadius(buttonSize / 2)
         } else {
-            //その他のボタン
+            //青ボタン(数字)
             Text(text)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(width: buttonSize, height: buttonSize)
-                .background(Color.gray)
+                .background(Color.buttonBulue)
                 .cornerRadius(buttonSize / 2)
         }
+        
     }// body
-    
-    /// 演算子ボタンが押されているかを返す関数
-    /// - Returns: ボタンとテキストの色を切り替えるために使う
-    private func isActiveColor() -> Bool {
-        //押された演算子ボタンか判定し、トリガーがtrueになっている場合のみ色を切り替える
-        if calcViewModel.calcOperator.rawValue == text && calcViewModel.isWhite {
-            return calcViewModel.calcOperator.isActive()
-        } else {
-            return false
-        }
-    }// isActive
 }
 
 struct CircleText_Previews: PreviewProvider {
     static var previews: some View {
-        CircleText(calcViewModel: CalcViewModel(), text: "1")
+        CircleText(isHighlight: .constant(false), text: "1")
     }
 }
