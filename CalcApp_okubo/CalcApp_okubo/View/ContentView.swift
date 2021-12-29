@@ -35,7 +35,7 @@ struct ContentView: View {
                             //設定画面のリンク
                             NavigationLink(destination: ConfigView()) {
                                 Image(systemName: "gearshape.fill")
-                                    .font(.title)
+                                    .font(.system(size: screenWidth / 15))
                                     .foregroundColor(.buttonBulue)
                                     .padding(.trailing)
                                 
@@ -48,7 +48,7 @@ struct ContentView: View {
                                 .scaledToFit()
                             //読み上げ中に切り替わる画像
                             Image(systemName: calcViewModel.speaker.rawValue)
-                                .font(.title)
+                                .font(.system(size: screenWidth / 10))
                                 .foregroundColor(calcViewModel.speaker.color())
                         }
                     }// ZStack
