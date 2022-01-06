@@ -18,7 +18,7 @@ struct CircleText: View {
         if text == "C" || text == "=" {
             //黄色ボタン
             Text(text)
-                .font(.title)
+                .font(.system(size: buttonSize / 3))
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(width: buttonSize * 1.5, height: buttonSize / 1.5)
@@ -27,21 +27,21 @@ struct CircleText: View {
         } else if text == "+" || text == "-" {
             //点滅する青ボタン(+,-)
             Text(text)
-                .font(.title)
+                .font(.system(size: buttonSize / 3))
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(width: buttonSize, height: buttonSize)
                 .background(isHighlight ? Color.blue : Color.buttonBulue)
-                .cornerRadius(buttonSize / 2)
+                .clipShape(Circle())
         } else {
             //青ボタン(数字)
             Text(text)
-                .font(.title)
+                .font(.system(size: buttonSize / 3))
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(width: buttonSize, height: buttonSize)
                 .background(Color.buttonBulue)
-                .cornerRadius(buttonSize / 2)
+                .clipShape(Circle())
         }
         
     }// body
