@@ -1,1 +1,1 @@
-# CalcApp_okubo
+# 幼児向け電卓アプリ
