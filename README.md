@@ -8,6 +8,7 @@
 ## 2.機能
 ### ホーム画面
 この画面で計算を行います。
+
 ![電卓](https://github.com/Office-Meet/CalcApp_okubo/blob/README/README-Item/%E9%9B%BB%E5%8D%93%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-01-07%20at%2013.23.00.png?raw=true)
 
 ### 設定画面
