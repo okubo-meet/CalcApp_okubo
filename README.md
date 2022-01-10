@@ -12,6 +12,8 @@ https://user-images.githubusercontent.com/53589421/148719535-9dd46fa2-74e0-4767-
 ### ホーム画面
 この画面で計算を行います。
 
+入力状況に応じて+/-ボタンを青く点滅させることで、入力を誘導しています。
+
 ![電卓](https://github.com/Office-Meet/CalcApp_okubo/blob/README/README-Item/%E9%9B%BB%E5%8D%93%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-01-07%20at%2013.23.00.png?raw=true)
 
 ### 設定画面
