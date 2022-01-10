@@ -9,6 +9,8 @@
 ### ホーム画面
 この画面で計算を行います。
 
+https://user-images.githubusercontent.com/53589421/148719535-9dd46fa2-74e0-4767-aec9-af69be43803b.mov
+
 ![電卓](https://github.com/Office-Meet/CalcApp_okubo/blob/README/README-Item/%E9%9B%BB%E5%8D%93%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-01-07%20at%2013.23.00.png?raw=true)
 
 ### 設定画面
