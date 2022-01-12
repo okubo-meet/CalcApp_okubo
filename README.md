@@ -20,7 +20,7 @@ https://user-images.githubusercontent.com/53589421/148719535-9dd46fa2-74e0-4767-
 
 - Cボタンは入力が新しいものから1文字ずつ消していく。計算結果まで表示されている時は式をリセットします。
 
-![電卓](https://github.com/Office-Meet/CalcApp_okubo/blob/README/README-Item/%E9%9B%BB%E5%8D%93%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-01-07%20at%2013.23.00.png?raw=true)
+![電卓](https://user-images.githubusercontent.com/53589421/149059277-f08b7afd-308e-4863-ba9b-507d25f91eaa.png)
 
 ### 設定画面
 各設定項目は`UserDefaults`によって保持されます。
@@ -32,8 +32,6 @@ https://user-images.githubusercontent.com/53589421/148719535-9dd46fa2-74e0-4767-
 | サウンド | 水色ボタンのタップ音を３種類の中から選択できます。 |
 | 桁数 | 入力可能な桁数を1桁か2桁に設定します。 |
 
-![設定](https://github.com/Office-Meet/CalcApp_okubo/blob/README/README-Item/%E8%A8%AD%E5%AE%9A%E7%94%BB%E9%9D%A2%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-01-07%20at%2013.23.23.png?raw=true)
-![動物](https://github.com/Office-Meet/CalcApp_okubo/blob/README/README-Item/%E5%8B%95%E7%89%A9%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-01-07%20at%2013.24.16.png?raw=true)
-![言語](https://github.com/Office-Meet/CalcApp_okubo/blob/README/README-Item/%E8%A8%80%E8%AA%9E%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-01-07%20at%2013.24.46.png?raw=true)
-![サウンド](https://github.com/Office-Meet/CalcApp_okubo/blob/README/README-Item/%E3%82%B5%E3%82%A6%E3%83%B3%E3%83%89%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-01-07%20at%2013.25.15.png?raw=true)
-![桁数](https://github.com/Office-Meet/CalcApp_okubo/blob/README/README-Item/%E6%A1%81%E6%95%B0%20Screen%20Shot%20-%20iPhone%2013%20Pro%20-%202022-01-07%20at%2013.25.39.png?raw=true)
+![設定画面](https://user-images.githubusercontent.com/53589421/149059216-7be8fc03-2f3f-42ce-aace-753ebe2829b6.png)
+
+
