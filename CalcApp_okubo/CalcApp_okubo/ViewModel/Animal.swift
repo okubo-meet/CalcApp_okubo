@@ -108,5 +108,4 @@ enum Animal: String, CaseIterable {
             return 0.5
         }
     }
-    //com.icloud.slow-dancer-815.CalcApp-okubo
 }
