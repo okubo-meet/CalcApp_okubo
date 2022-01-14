@@ -63,4 +63,8 @@ https://user-images.githubusercontent.com/53589421/148719535-9dd46fa2-74e0-4767-
 - macOS Monterey 12.1
 - iOS14.5
 
-
+## 5.素材
+- 画像素材  
+ [いらすとや](https://www.irasutoya.com/)
+- 音声素材  
+ [無料効果音で遊ぼう！](https://taira-komori.jpn.org/index.html)
