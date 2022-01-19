@@ -35,8 +35,8 @@ class ConfigViewModel: ObservableObject {
     //初期化
     init() {
         //動物
-        let animalDefault = UserDefaults.standard.string(forKey: "animal") ?? "アルパカ"
-        animal = Animal(rawValue: animalDefault) ?? .alpaka
+        let animalDefault = UserDefaults.standard.string(forKey: "animal") ?? "イヌ"
+        animal = Animal(rawValue: animalDefault) ?? .dog
         //読み上げ言語
         let languageDefault = UserDefaults.standard.string(forKey: "language") ?? "日本語"
         language = Language(rawValue: languageDefault) ?? .japanese
