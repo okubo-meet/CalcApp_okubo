@@ -23,7 +23,7 @@ struct ContentView: View {
     //画面の幅
     private let screenWidth = UIScreen.main.bounds.width
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.backGround
                     .edgesIgnoringSafeArea(.all)
@@ -31,14 +31,21 @@ struct ContentView: View {
                     ZStack {
                         HStack {
                             Spacer()
-                            
                             //設定画面のリンク
-                            NavigationLink(destination: ConfigView()) {
+//                            NavigationLink(destination: ConfigView()) {
+//                                Image(systemName: "gearshape.fill")
+//                                    .font(.system(size: screenWidth / 15))
+//                                    .foregroundColor(.buttonBlue)
+//                                    .padding(.trailing)
+//
+//                            }
+                            NavigationLink {
+                                ConfigView()
+                            } label: {
                                 Image(systemName: "gearshape.fill")
                                     .font(.system(size: screenWidth / 15))
-                                    .foregroundColor(.buttonBulue)
+                                    .foregroundColor(.buttonBlue)
                                     .padding(.trailing)
-                                
                             }
                         }// HStack
                         HStack {
@@ -87,7 +94,6 @@ struct ContentView: View {
                     .background(Color.white)
                     .cornerRadius(10)
                     .padding(.horizontal)
-                    
                         //２重のForEachで多次元配列の値をからボタンに当てはめて並べる
                         ForEach(0..<buttonStr.count, id: \.self) { row in
                             HStack(spacing: 0) {
@@ -103,8 +109,7 @@ struct ContentView: View {
                                 }// ForEach col
                             }// HStack
                         }// ForEach row
-                    
-                    
+                    // 画面下部の画像
                     Image("animals")
                         .resizable()
                         .scaledToFill()
@@ -117,8 +122,9 @@ struct ContentView: View {
                 calcViewModel.setUp(config: configViewModel)
             }
             .navigationBarHidden(true)
-        }// NavigationView
+        }// NavigationStack
         .navigationViewStyle(.stack) //iPadでも同じ画面表示
+        .tint(.white)// NavugationBarのボタンの色を設定
     }// body
     
     init() {
@@ -126,19 +132,27 @@ struct ContentView: View {
         let appearance = UINavigationBar.appearance()
         //背景色
         appearance.backgroundColor = UIColor(Color.navigation)
-        //ボタンの色
-        appearance.tintColor = UIColor.white
+        //ボタンの色 iOS16で機能しなくなった
+//        appearance.tintColor = UIColor.white
         //タイトルテキストの色・大
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         //タイトルテキストの色・小
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-        //Formの背景色
-        UITableView.appearance().backgroundColor = UIColor(Color.backGround)
+        //Formの背景色 ＊iOS16でUITableViewからUICollectionViewに変わったらしい
+//        UICollectionView.appearance().backgroundColor = UIColor(Color.backGround)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+// Formの背景色を変えるための拡張
+extension UICollectionReusableView {
+    override open var backgroundColor: UIColor? {
+        get { .clear }
+        set { super.backgroundColor = UIColor(Color.backGround) }
     }
 }

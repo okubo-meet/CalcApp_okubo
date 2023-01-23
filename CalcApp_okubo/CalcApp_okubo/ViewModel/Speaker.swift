@@ -17,7 +17,7 @@ enum Speaker: String {
     func color() -> Color {
         switch self {
         case .on:
-            return Color.buttonBulue
+            return Color.buttonBlue
         case .off:
             return Color.gray
         }
