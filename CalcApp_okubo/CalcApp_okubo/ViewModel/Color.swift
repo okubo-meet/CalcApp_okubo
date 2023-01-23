@@ -13,7 +13,7 @@ extension Color {
     /// NavigationBarの色
     static let navigation: Color = Color("navigation")
     /// 青いボタンの色
-    static let buttonBulue: Color = Color("buttonBulue")
+    static let buttonBlue: Color = Color("buttonBlue")
     /// 黄色いボタンの色
     static let buttonYellow: Color = Color("buttonYellow")
 }

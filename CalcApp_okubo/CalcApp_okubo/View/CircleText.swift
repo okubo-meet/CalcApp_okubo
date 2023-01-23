@@ -31,7 +31,7 @@ struct CircleText: View {
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(width: buttonSize, height: buttonSize)
-                .background(isHighlight ? Color.blue : Color.buttonBulue)
+                .background(isHighlight ? Color.blue : Color.buttonBlue)
                 .clipShape(Circle())
         } else {
             //青ボタン(数字)
@@ -40,7 +40,7 @@ struct CircleText: View {
                 .fontWeight(.bold)
                 .foregroundColor(.white)
                 .frame(width: buttonSize, height: buttonSize)
-                .background(Color.buttonBulue)
+                .background(Color.buttonBlue)
                 .clipShape(Circle())
         }
         
