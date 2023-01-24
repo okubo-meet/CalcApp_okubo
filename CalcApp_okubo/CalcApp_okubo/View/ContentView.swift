@@ -32,13 +32,6 @@ struct ContentView: View {
                         HStack {
                             Spacer()
                             //設定画面のリンク
-//                            NavigationLink(destination: ConfigView()) {
-//                                Image(systemName: "gearshape.fill")
-//                                    .font(.system(size: screenWidth / 15))
-//                                    .foregroundColor(.buttonBlue)
-//                                    .padding(.trailing)
-//
-//                            }
                             NavigationLink {
                                 ConfigView()
                             } label: {
